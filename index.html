@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f2f0e8">
+    <title>staircaze TABlature creaTOR</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell" aria-labelledby="app-title">
+      <header class="app-header">
+        <div class="brand-copy">
+          <p class="eyebrow">
+            <img class="eyebrow-logo" src="src/sTABTOR.png" alt="sTABTOR">
+          </p>
+          <h1 id="app-title"><span class="brand-accent">s</span>taircaze <span class="brand-accent">TAB</span>lature genera<span class="brand-accent">TOR</span>
+          Version 1.0</h1>
+            <label class="brand-tagline">
+              <span>for</span>
+              <select id="instrument-choice" name="instrument-choice" aria-label="Instrument">
+                <option value="bass" selected>Bass</option>
+                <option value="guitar">Guitar</option>
+              </select>
+            </label>
+          
+        </div>
+        <a class="brand-link" href="https://staircaze.github.io/" target="_blank" rel="noopener noreferrer">
+          <img class="brand-logo" src="src/staircaze_logo.png" alt="Visit Staircaze website">
+        </a>
+      </header>
+      <section class="work-area" aria-label="Tab editor">
+        <form class="entry-controls" id="note-form">
+          <label class="control">
+            <span>String number</span>
+            <select id="string-count" name="string-count">
+              <option value="4">4 strings</option>
+              <option value="5">5 strings</option>
+              <option value="6">6 strings</option>
+            </select>
+          </label>
+          <label class="control">
+            <span>Note on which string</span>
+            <select id="string-choice" name="string-choice"></select>
+          </label>
+          <label class="control fret-control">
+            <span>Fret number</span>
+            <select id="fret-number" name="fret-number">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+            </select>
+          </label>
+          <label class="control">
+            <span>Duration (above tab)</span>
+            <select id="duration-choice" name="duration-choice">
+              <option value="w">Whole (w)</option>
+              <option value="h">Half (h)</option>
+              <option value="q" selected>Quarter (q)</option>
+              <option value="e">Eighth (e)</option>
+              <option value="s">16th (s)</option>
+              <option value="t">32nd (t)</option>
+              <option value="w.">Dotted whole (w.)</option>
+              <option value="h.">Dotted half (h.)</option>
+              <option value="q.">Dotted quarter (q.)</option>
+              <option value="e.">Dotted eighth (e.)</option>
+              <option value="s.">Dotted 16th (s.)</option>
+              <option value="t.">Dotted 32nd (t.)</option>
+            </select>
+          </label>
+          <label class="control">
+            <span>Left finger (below tab)</span>
+            <select id="finger-choice" name="finger-choice">
+              <option value="">none</option>
+              <option value="1">1 = index</option>
+              <option value="2">2 = middle</option>
+              <option value="3">3 = ring</option>
+              <option value="4">4 = pinkie</option>
+              <option value="5">5 = thumb</option>
+            </select>
+          </label>
+          <label class="control">
+            <span>Right finger (tab bottom)</span>
+            <select id="right-finger-choice" name="right-finger-choice">
+              <option value="">none</option>
+              <option value="i">i = index</option>
+              <option value="m">m = middle</option>
+              <option value="r">r = ring</option>
+              <option value="p">p = pinkie</option>
+              <option value="t">t = thumb</option>
+            </select>
+          </label>
+          <label class="control">
+            <span>Technique</span>
+            <select id="technique-choice" name="technique-choice">
+              <option value="">Normal</option>
+              <option value="h">Hammer-on (h)</option>
+              <option value="p">Pull-off (p)</option>
+              <option value="b">Bend (b)</option>
+              <option value="v">Vibrato (v)</option>
+              <option value="S">Slap (S)</option>
+              <option value="P">Pop (P)</option>
+              <option value="t">Tap (t)</option>
+              <option value="H">Harmonic (H)</option>
+              <option value="x">Muted (x)</option>
+              <option value="slide">Slide</option>
+            </select>
+          </label>
+          <label class="control" id="slide-control" hidden>
+            <span>Slide to fret</span>
+            <input id="slide-target" name="slide-target" type="number" min="0" max="24" step="1" value="12" required disabled>
+          </label>
+          <div class="entry-actions">
+            <button class="add-note" type="submit">Add note</button>
+            <button class="secondary-action" id="add-rest" type="button">Add rest</button>
+            <button class="secondary-action" id="add-bar" type="button">Add bar</button>
+            <button class="secondary-action" id="add-double-bar" type="button">Add double bar</button>
+            <label class="repeat-count-control">
+              <input id="repeat-count" name="repeat-count" type="number" min="2" step="1" value="2" aria-label="Repeat count">
+              <span>Times</span>
+            </label>
+            <button class="secondary-action" id="new-line" type="button" disabled>New line</button>
+            <button class="secondary-action" id="undo-entry" type="button" aria-label="Undo last event" title="Undo last event" disabled>Undo</button>
+            <button class="secondary-action" id="clear-all" type="button" aria-label="Clear all events" title="Clear all events" disabled>Clear</button>
+            <a id="readme-link" class="readme-link" href="README.md" target="_blank" rel="noopener noreferrer">Readme</a>
+          </div>
+          <div class="section-actions">
+            <button class="secondary-action" id="add-section" type="button">Add section</button>
+            <input id="section-text" name="section-text" type="text" maxlength="80" placeholder="Section text (e.g. Intro:)" aria-label="Section text">
+          </div>
+        </form>
+        <section class="metadata-section" aria-labelledby="metadata-title">
+          <h2 id="metadata-title">TAB META data (tobe shown in downloaded TAB file)</h2>
+          <div class="metadata-grid">
+            <label class="metadata-field">
+              <span>Title</span>
+              <input id="tab-title" type="text" maxlength="80" autocomplete="off">
+            </label>
+            <label class="metadata-field">
+              <span>Artist / group</span>
+              <input id="tab-artist" type="text" maxlength="80" autocomplete="off">
+            </label>
+            <label class="metadata-field">
+              <span>Info (e.g. 4/4, Do=E,120 BPM)</span>
+              <input id="tab-info" type="text" maxlength="120" placeholder="Meter, key, tempo" autocomplete="off">
+            </label>
+            <label class="metadata-field">
+              <span>Transcribed by</span>
+              <input id="tab-creator" type="text" maxlength="80" autocomplete="off">
+            </label>
+          </div>
+        </section>
+        <section class="preview-section" aria-labelledby="preview-title">
+          <div class="preview-heading">
+            <h2 id="preview-title">Tablature</h2>
+            <div class="preview-tools">
+              <output id="entry-count" aria-live="polite">0 events</output>
+              <button id="open-tab" class="secondary-action" type="button">Open .TAB</button>
+              <input id="tab-file" type="file" accept=".TAB,.tab,text/plain" hidden>
+              <button id="export-tab" class="secondary-action" type="button" disabled>Download .TAB</button>
+            </div>
+          </div>
+          <pre id="tab-preview" class="tab-preview" aria-live="polite"></pre>
+        </section>
+        <section id="imported-section" class="imported-section" aria-labelledby="imported-title" hidden>
+          <div class="imported-heading">
+            <div>
+              <h2 id="imported-title">Imported tablature</h2>
+              <output id="imported-name"></output>
+            </div>
+            <button id="close-import" class="secondary-action" type="button">Close</button>
+          </div>
+          <p id="import-error" role="status" hidden></p>
+          <pre id="imported-preview" class="tab-preview"></pre>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
