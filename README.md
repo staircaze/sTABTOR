@@ -1,6 +1,6 @@
-# Stabtor
+# sTABTOR
 
-Stabtor is a browser-based ASCII bass and guitar tablature editor inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya.
+sTABTOR is a browser-based ASCII bass and guitar tablature editor inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya.
 It uses plain HTML, CSS, and JavaScript with no build step or external dependencies.
 
 ## Version update
@@ -21,8 +21,8 @@ It uses plain HTML, CSS, and JavaScript with no build step or external dependenc
 
 - **Instrument** switches between Bass and Guitar. Bass offers 4, 5, or 6 strings; Guitar offers 6 or 7. Each instrument remembers its last selected string count.
 - **String number** selects the tuning and number of staff lines.
-- **Note on string** chooses the individual string for the next note. Guitar strings with the same pitch, such as high E and low E, remain separate choices.
-- **Fret** selects a fret from 0 through 24.
+- **Note on which string** chooses the individual string for the next note. Guitar strings with the same pitch, such as high E and low E, remain separate choices.
+- **Fret number** selects a fret from 0 through 24.
 - **Duration (above tab)** selects the rhythm symbol shown above the tablature column. Dotted values end in a period.
 - **Left finger (below tab)** selects none or fingers 1-5. A selected number is printed beneath the staff.
 - **Right finger (tab bottom)** selects none or i, m, r, p, or t. A selected letter is printed on the line below the left-finger indicators.
@@ -55,7 +55,7 @@ It uses plain HTML, CSS, and JavaScript with no build step or external dependenc
 
 ## File Handling
 
-Stabtor does not write directly to arbitrary folders. Use **Download .TAB** to
+sTABTOR does not write directly to arbitrary folders. Use **Download .TAB** to
 save the current composition through the browser, and **Open .TAB** to choose an
 existing file for viewing. Imported files are not parsed into editable notes.
 

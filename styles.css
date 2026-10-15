@@ -37,29 +37,30 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 104px;
+  min-height: 70px;
+  box-sizing: border-box;
+
   /* bottom border styling 
   border-bottom: 2px solid var(--ink);
   */
 }
 
 .brand-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
 }
 
+/* Logo: first row, bottom aligned */
 .eyebrow {
-  margin: 0;
-  color: var(--accent);
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.1;
+    margin: 0;
+    align-self: flex-start;
 }
 
+/* Logo dimensions */
 .eyebrow-logo {
+    display: block;  
     width: auto;
     height: 40px;
 }
@@ -72,14 +73,30 @@ h1 {
   line-height: 1.2;
 }
 
+.brand-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+#app-title {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Instrument selector: second row, vertically centered */
 .brand-tagline {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    flex-shrink: 0;
+    
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.2;
 }
 
 .brand-tagline select {
@@ -92,8 +109,11 @@ h1 {
 
 .brand-accent {
   color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
 }
-
 .brand-link {
   display: block;
   flex: 0 0 auto;

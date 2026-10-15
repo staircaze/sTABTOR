@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f2f0e8">
-    <title>staircaze TABlature creaTOR</title>
+    <title>staircaze TABlature generaTOR</title>
     <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
   </head>
@@ -12,23 +12,27 @@
     <main class="app-shell" aria-labelledby="app-title">
       <header class="app-header">
         <div class="brand-copy">
-          <p class="eyebrow">
+          <div class="eyebrow">
             <img class="eyebrow-logo" src="src/sTABTOR.png" alt="sTABTOR">
-          </p>
-          <h1 id="app-title"><span class="brand-accent">s</span>taircaze <span class="brand-accent">TAB</span>lature genera<span class="brand-accent">TOR</span>
-          Version 1.0</h1>
-            <label class="brand-tagline">
-              <span>for</span>
-              <select id="instrument-choice" name="instrument-choice" aria-label="Instrument">
-                <option value="bass" selected>Bass</option>
-                <option value="guitar">Guitar</option>
-              </select>
-            </label>
-          
+          </div>
+          <h1 id="app-title">
+            <span class="brand-accent">s</span>taircaze 
+            <span class="brand-accent">TAB</span>lature genera<span class="brand-accent">TOR Version 1.0</span>
+          </h1>
+          <label class="brand-tagline">
+            <span>for</span>
+            <select id="instrument-choice" name="instrument-choice" aria-label="Instrument">
+              <option value="bass" selected>Bass</option>
+              <option value="guitar">Guitar</option>
+            </select>
+          </label>  
         </div>
+        <!-- after main website is ready...
         <a class="brand-link" href="https://staircaze.github.io/" target="_blank" rel="noopener noreferrer">
           <img class="brand-logo" src="src/staircaze_logo.png" alt="Visit Staircaze website">
         </a>
+        -->
+        <img class="brand-logo" src="src/staircaze_logo.png" alt="Comin soon to visit staircaze website">
       </header>
       <section class="work-area" aria-label="Tab editor">
         <form class="entry-controls" id="note-form">
@@ -131,7 +135,36 @@
           </label>
           <label class="control" id="slide-control" hidden>
             <span>Slide to fret</span>
+            <!-- if using input text
             <input id="slide-target" name="slide-target" type="number" min="0" max="24" step="1" value="12" required disabled>
+            -->
+            <select id="slide-target" name="slide-target" required disabled>
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+            </select>
           </label>
           <div class="entry-actions">
             <button class="add-note" type="submit">Add note</button>

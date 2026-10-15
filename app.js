@@ -217,7 +217,7 @@ function createTabText() {
 		"-".repeat(95),
 		"TABS READING GUIDE:",
 		"-".repeat(95),
-		`<<< Generated with sTABTOR by PHAD | https://staircaze.github.io/stabtor >>>`,
+		`<<< Generated with sTABTOR by PHAD | https://staircaze.github.io/sTABTOR >>>`,
 		"",
 		"Note length (above the strings):",
 		"w = whole, h = half, q = quarter, e = eighth, s = sixteenth, t = thirty-second.",
