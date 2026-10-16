@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>sTABTOR — Documentation</title>
+
+    <!-- Website stylesheet -->
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Markdown documentation page styling -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f4f5f7;
+            color: #222;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .readme-header {
+            padding: 20px;
+            background: #222;
+            color: white;
+        }
+
+        .readme-header a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .readme-header a:hover {
+            text-decoration: underline;
+        }
+
+        .readme-page {
+            box-sizing: border-box;
+            width: calc(100% - 40px);
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 32px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .readme-page h1,
+        .readme-page h2,
+        .readme-page h3,
+        .readme-page h4 {
+            line-height: 1.3;
+            margin-top: 1.5em;
+        }
+
+        .readme-page h1:first-child {
+            margin-top: 0;
+        }
+
+        .readme-page a {
+            color: #0066cc;
+        }
+
+        .readme-page img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .readme-page pre {
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 16px;
+            background: #f3f4f6;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .readme-page code {
+            font-family: Consolas, "Courier New", monospace;
+            overflow-wrap: anywhere;
+        }
+
+        .readme-page :not(pre) > code {
+            padding: 2px 5px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .readme-page table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            border-collapse: collapse;
+        }
+
+        .readme-page th,
+        .readme-page td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .readme-page th {
+            background: #f0f0f0;
+        }
+
+        .readme-page blockquote {
+            margin-left: 0;
+            padding: 8px 16px;
+            border-left: 4px solid #bbb;
+            color: #555;
+            background: #f8f8f8;
+        }
+
+        .readme-page hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 28px 0;
+        }
+
+        .readme-status {
+            padding: 12px;
+            background: #f3f4f6;
+            border-radius: 5px;
+        }
+
+        .readme-error {
+            color: #a40000;
+            background: #fff0f0;
+            border: 1px solid #e0a0a0;
+        }
+
+        @media (max-width: 600px) {
+            .readme-page {
+                width: calc(100% - 20px);
+                margin: 10px auto;
+                padding: 18px;
+            }
+
+            .readme-header {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Documentation page header -->
+    <header class="readme-header">
+        <a href="#" onclick="window.close(); return false;">✕ Close the Readme</a>
+    </header>
+
+    <!-- README content will be rendered here -->
+    <main class="readme-page" id="readme-content">
+        <p class="readme-status">Loading documentation...</p>
+    </main>
+
+    <!-- Markdown rendering library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Load and render README.md -->
+    <script>
+        async function loadReadme() {
+            const content = document.getElementById("readme-content");
+
+            try {
+                // Confirm that the Markdown library loaded.
+                if (typeof marked === "undefined") {
+                    throw new Error(
+                        "The Markdown library could not be loaded. Check your internet connection."
+                    );
+                }
+
+                // Fetch README.md from the same directory as readme.html.
+                const response = await fetch("./README.md");
+
+                if (!response.ok) {
+                    throw new Error(
+                        `README.md could not be loaded. HTTP status: ${response.status}.`
+                    );
+                }
+
+                const markdown = await response.text();
+
+                // Convert Markdown into HTML.
+                content.innerHTML = marked.parse(markdown);
+
+                // Make links in the documentation open in a new tab.
+                content.querySelectorAll("a").forEach(link => {
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                });
+
+                // Make README images responsive.
+                content.querySelectorAll("img").forEach(img => {
+                    img.loading = "lazy";
+                });
+
+            } catch (error) {
+                console.error("README loading error:", error);
+
+                content.replaceChildren();
+
+                const message = document.createElement("div");
+                message.className = "readme-status readme-error";
+
+                const heading = document.createElement("h2");
+                heading.textContent = "Unable to load documentation";
+
+                const details = document.createElement("p");
+                details.textContent = error.message;
+
+                const instructions = document.createElement("p");
+                instructions.textContent =
+                    "Check that README.md exists in the same folder as readme.html, " +
+                    "that the filename uses the correct capitalization, and that the " +
+                    "website is being opened through a web server.";
+
+                const backLink = document.createElement("a");
+                backLink.href = "./index.html";
+                backLink.textContent = "Return to sTABTOR";
+
+                message.append(heading, details, instructions, backLink);
+                content.appendChild(message);
+            }
+        }
+
+        loadReadme();
+    </script>
+
+</body>
+</html>

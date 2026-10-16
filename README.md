@@ -1,7 +1,13 @@
-# sTABTOR
 
-sTABTOR is a browser-based ASCII bass and guitar tablature generator inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya.
-It uses plain HTML, CSS, and JavaScript with no build step or external dependencies.
+<p align="left">
+  <img src="src/sTABTOR.png" alt="sTABTOR Logo" width="200">
+</p>
+
+
+sTABTOR is a browser-based ASCII bass and guitar tablature online generator.
+
+Inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya,
+now it uses plain HTML, CSS, and JavaScript with no build step or external dependencies.
 
 ## Version update
 - Version 1.0
@@ -23,17 +29,44 @@ It uses plain HTML, CSS, and JavaScript with no build step or external dependenc
 
 ### Section label
 
-- **Section text** plus **Add section** adds a heading such as `Intro:` above a tablature block. When added after notes, the heading starts a new block. The text field must not be empty.
+- **Section text** plus **Add section** adds a heading such as `Intro:` above tablature staff. When added after notes, the heading starts a new block. The text field must not be empty.
 
 ### Note settings
 
 - **String number** selects the number of staff lines with each line string standard tuning.
 - **Note on which string** chooses the individual string for the next note. Guitar strings with the same pitch, such as high E and low E, remain separate choices.
 - **Fret number** selects a fret from 0 through 24.
-- **Duration (above tab)** selects the rhythm symbol shown above the tablature staff: w = whole, h = half, q = quarter, e = eighth, s = sixteenth, t = thirty-second, a period after a duration symbol marks a dotted note.
-- **Left finger (below tab)** selects none or fingers 1-5. A selected number is printed beneath the staff: 1 = index, 2 = middle, 3 = ring, 4 = pinkie, 5 = thumb.
-- **Right finger (tab bottom)** selects none or i, m, r, p, or t. A selected letter is printed on the line below the left-finger indicators: i = index, m = middle, r = ring, p = pinkie, t = thumb.
-- **Technique** adds a notation symbol to the fret: hammer-on (h), pull-off (p), bend (b), vibrato (v), slap (S), pop (P), tap (t), harmonic (H), or muted (x). For **Slide**, enter the destination in **Slide to fret**; the direction is shown as `/` or `\`.
+- **Duration (above tab)** selects the rhythm symbol shown above the tablature staff: 
+  - w = whole
+  - h = half
+  - q = quarter
+  - e = eighth
+  - s = sixteenth
+  - t = thirty-second
+  - a period after a duration symbol marks a dotted note.
+- **Left finger (below tab)** selects none or fingers 1-5. A selected number is printed beneath the staff:
+  -  1 = index
+  -  2 = middle
+  -  3 = ring
+  -  4 = pinkie
+  -  5 = thumb.
+- **Right finger (tab bottom)** selects none or i, m, r, p, or t. A selected letter is printed on the line below the left-finger indicators:
+  - i = index
+  - m = middle
+  - r = ring
+  - p = pinkie
+  - t = thumb.
+- **Technique** adds a notation symbol to the fret:
+  - hammer-on (h)
+  - pull-off (p)
+  - bend (b)
+  - vibrato (v)
+  - slap (S)
+  - pop (P)
+  - tap (t)
+  - harmonic (H)
+  - or muted (x)
+  - For **Slide**, enter the destination in **Slide to fret**; the direction is shown as `/` or `\`.
 
 ### Tablature actions
 
@@ -61,8 +94,10 @@ It uses plain HTML, CSS, and JavaScript with no build step or external dependenc
 
 ## File Handling
 
-sTABTOR does not write directly to arbitrary folders. Use **Download .TAB** to
-save the current composition through the browser, and **Open .TAB** to choose an
+sTABTOR does not write directly to arbitrary folders. Use:
+- **Download .TAB** to
+save the current composition through the browser to local drive download folder,
+- **Open .TAB** to choose an
 existing file for viewing. Imported files are not parsed into editable notes.
 
 Compositions are held in memory while the page is open. Download the `.TAB`
