@@ -38,6 +38,10 @@
       </header>
       <section class="work-area" aria-label="Tab editor">
         <form class="entry-controls" id="note-form">
+          <div class="section-actions">
+            <button class="secondary-action" id="add-section" type="button">Add section</button>
+            <input id="section-text" name="section-text" type="text" maxlength="80" placeholder="Section text (e.g. Intro:)" aria-label="Section text">
+          </div>
           <label class="control">
             <span>String number</span>
             <select id="string-count" name="string-count">
@@ -83,6 +87,7 @@
           <label class="control">
             <span>Duration (above tab)</span>
             <select id="duration-choice" name="duration-choice">
+              <option value=" ">none</option>
               <option value="w">Whole (w)</option>
               <option value="h">Half (h)</option>
               <option value="q" selected>Quarter (q)</option>
@@ -181,10 +186,6 @@
             <button class="secondary-action" id="undo-entry" type="button" aria-label="Undo last event" title="Undo last event" disabled>Undo</button>
             <button class="secondary-action" id="clear-all" type="button" aria-label="Clear all events" title="Clear all events" disabled>Clear</button>
             <a id="readme-link" class="readme-link" href="README.md" target="_blank" rel="noopener noreferrer">Readme</a>
-          </div>
-          <div class="section-actions">
-            <button class="secondary-action" id="add-section" type="button">Add section</button>
-            <input id="section-text" name="section-text" type="text" maxlength="80" placeholder="Section text (e.g. Intro:)" aria-label="Section text">
           </div>
         </form>
         <section class="metadata-section" aria-labelledby="metadata-title">

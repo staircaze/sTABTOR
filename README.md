@@ -1,11 +1,11 @@
 # sTABTOR
 
-sTABTOR is a browser-based ASCII bass and guitar tablature editor inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya.
+sTABTOR is a browser-based ASCII bass and guitar tablature generator inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya.
 It uses plain HTML, CSS, and JavaScript with no build step or external dependencies.
 
 ## Version update
 - Version 1.0
-- Updated on 15/10/2026
+- Updated on 17/10/2026
 
 ## Features
 
@@ -17,15 +17,22 @@ It uses plain HTML, CSS, and JavaScript with no build step or external dependenc
 
 ## Controls
 
-### Instrument and note settings
+### Instrument
 
 - **Instrument** switches between Bass and Guitar. Bass offers 4, 5, or 6 strings; Guitar offers 6 or 7. Each instrument remembers its last selected string count.
-- **String number** selects the tuning and number of staff lines.
+
+### Section label
+
+- **Section text** plus **Add section** adds a heading such as `Intro:` above a tablature block. When added after notes, the heading starts a new block. The text field must not be empty.
+
+### Note settings
+
+- **String number** selects the number of staff lines with each line string standard tuning.
 - **Note on which string** chooses the individual string for the next note. Guitar strings with the same pitch, such as high E and low E, remain separate choices.
 - **Fret number** selects a fret from 0 through 24.
-- **Duration (above tab)** selects the rhythm symbol shown above the tablature column. Dotted values end in a period.
-- **Left finger (below tab)** selects none or fingers 1-5. A selected number is printed beneath the staff.
-- **Right finger (tab bottom)** selects none or i, m, r, p, or t. A selected letter is printed on the line below the left-finger indicators.
+- **Duration (above tab)** selects the rhythm symbol shown above the tablature staff: w = whole, h = half, q = quarter, e = eighth, s = sixteenth, t = thirty-second, a period after a duration symbol marks a dotted note.
+- **Left finger (below tab)** selects none or fingers 1-5. A selected number is printed beneath the staff: 1 = index, 2 = middle, 3 = ring, 4 = pinkie, 5 = thumb.
+- **Right finger (tab bottom)** selects none or i, m, r, p, or t. A selected letter is printed on the line below the left-finger indicators: i = index, m = middle, r = ring, p = pinkie, t = thumb.
 - **Technique** adds a notation symbol to the fret: hammer-on (h), pull-off (p), bend (b), vibrato (v), slap (S), pop (P), tap (t), harmonic (H), or muted (x). For **Slide**, enter the destination in **Slide to fret**; the direction is shown as `/` or `\`.
 
 ### Tablature actions
@@ -34,10 +41,9 @@ It uses plain HTML, CSS, and JavaScript with no build step or external dependenc
 - **Add rest** inserts a rest using the selected duration. The rest is shown as r/e/s/t down the first four string lines.
 - **Add bar** inserts a single bar line.
 - **Add double bar** inserts a double-bar boundary. Double bars pair in order: the first opens a repeated section and the next closes it. Set **Times** before adding the closing double bar; its `Nx` marker appears above the closing bar.
-- **New line** starts a new tablature staff.
+- **New line** starts a new tablature staff below the existing without section label.
 - **Undo** removes the most recently added note or tablature event.
 - **Clear** asks for confirmation, then removes all tablature events. Metadata and instrument settings remain.
-- **Section text** plus **Add section** adds a heading such as `Intro:` above a tablature block. When added after notes, the heading starts a new block. The text field must not be empty.
 - **Readme** opens this guide in a new browser tab.
 
 ### TAB META data and file actions
