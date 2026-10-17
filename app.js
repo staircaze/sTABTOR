@@ -181,6 +181,7 @@ function renderTab() {
 			return section ? `${section}\n${renderedSystem}` : renderedSystem;
 		})
 		.join("\n\n");
+		tabPreview.scrollTop = tabPreview.scrollHeight;
 
 	entryCount.textContent = `${entries.length} ${entries.length === 1 ? "event" : "events"}`;
 	exportButton.disabled = entries.length === 0;
@@ -218,24 +219,19 @@ function createTabText() {
 		"TABS READING GUIDE:",
 		"-".repeat(95),
 		`<<< Generated with sTABTOR by PHAD | https://staircaze.github.io/sTABTOR >>>`,
-		"",
 		"Note length (above the strings):",
-		"w = whole, h = half, q = quarter, e = eighth, s = sixteenth, t = thirty-second.",
-		"A period after a duration symbol marks a dotted note.",
-		"",
+		"   w = whole, h = half, q = quarter, e = eighth, s = sixteenth, t = thirty-second.",
+		"   a period after a duration symbol marks a dotted note.",
 		"Left finger (below the strings):",
-		"1 = index, 2 = middle, 3 = ring, 4 = pinkie, 5 = thumb.",
-		"",
+		"   1 = index, 2 = middle, 3 = ring, 4 = pinkie, 5 = thumb.",
 		"Right finger (at tab bottom):",
-		"i = index, m = middle, r = ring, p = pinkie, t = thumb.",
-		"",
+		"   i = index, m = middle, r = ring, p = pinkie, t = thumb.",
 		"Special note symbols:",
-		"h = hammer-on, p = pull-off, b = bend, v = vibrato, / = slide up; \\ = slide down,",
-		"S = slap, P = pop, t = tap, H = harmonic, x = muted note,",
-		"| = bar line; || = double bar line.",
-		"",
+		"   h = hammer-on, p = pull-off, b = bend, v = vibrato, / = slide up; \\ = slide down,",
+		"   S = slap, P = pop, t = tap, H = harmonic, x = muted note,",
+		"   | = bar line; || = double bar line.",
 		"Repeat count:",
-		"Nx above a closing double bar marks how many times the section between double bars is played.",
+		"   Nx above a closing double bar marks N times the section between double bars repeat.",
 		separator,
 	];
 	const formatHeaderLine = (label, value) => `${label.padEnd(15, " ")}: ${value}`;

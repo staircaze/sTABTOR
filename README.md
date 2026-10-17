@@ -11,7 +11,7 @@ now it uses plain HTML, CSS, and JavaScript with no build step or external depen
 
 ## Version update
 - Version 1.0
-- Updated on 17/10/2026
+- Updated on 18/10/2026
 
 ## Features
 
@@ -110,3 +110,7 @@ and file inputs. Core editor interactions and file reading/Blob generation were
 checked in VS Code's Chrome 150-based runtime. Standalone Chrome and Edge were
 smoke-tested by rendering screenshots; their full workflows were not tested.
 Firefox and Safari were not available for testing.
+
+## Further contact or information
+
+<staircaze@gmail.com>

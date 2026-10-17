@@ -521,3 +521,10 @@ button:focus-visible {
     font-size: 13px;
   }
 }
+/* Keep the tablature preview within a fixed height */
+#tab-preview {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: pre;
+}
