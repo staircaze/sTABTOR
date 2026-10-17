@@ -9,7 +9,7 @@ sTABTOR is a browser-based ASCII bass and guitar tablature online generator.
 Inspired by AdiBASS 2.0 built in year 2002 by P Hadiwijaya,
 now it uses plain HTML, CSS, and JavaScript with no build step or external dependencies.
 
-## Version update
+## Version Update
 - Version 1.0
 - Updated on 18/10/2026
 
@@ -111,6 +111,6 @@ checked in VS Code's Chrome 150-based runtime. Standalone Chrome and Edge were
 smoke-tested by rendering screenshots; their full workflows were not tested.
 Firefox and Safari were not available for testing.
 
-## Further contact or information
+## Further Contact or Information
 
 <staircaze@gmail.com>
