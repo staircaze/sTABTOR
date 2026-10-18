@@ -50,6 +50,19 @@ const entries = [];
 const selectedStringCounts = { bass: "4", guitar: "6" };
 let activeInstrument = instrumentChoice.value;
 
+/* Tablature height adjuster */
+function updatePreviewHeight() {
+    const heights = {
+        "4": 220,
+        "5": 275,
+        "6": 330,
+        "7": 385
+    };
+
+    tabPreview.style.maxHeight =
+        `${heights[stringCount.value] || 220}px`;
+}
+
 function getCurrentTuning() {
 	return tuningByInstrument[instrumentChoice.value][stringCount.value];
 }
@@ -306,6 +319,7 @@ function addBar(glyph) {
 stringCount.addEventListener("change", () => {
 	selectedStringCounts[instrumentChoice.value] = stringCount.value;
 	renderStringChoices();
+	updatePreviewHeight();
 	renderTab();
 });
 
@@ -378,4 +392,5 @@ techniqueChoice.addEventListener("change", () => {
 
 renderStringCountChoices();
 renderStringChoices();
+updatePreviewHeight();
 renderTab();

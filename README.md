@@ -111,6 +111,13 @@ checked in VS Code's Chrome 150-based runtime. Standalone Chrome and Edge were
 smoke-tested by rendering screenshots; their full workflows were not tested.
 Firefox and Safari were not available for testing.
 
+## Compatible TAB Archive Websites
+
+These are some tablature archive websites where sTABTOR tablature result are proven successfully submitted there:
+- <https://www.bigbasstabs.com>
+- <https://www.ultimate-guitar.com>
+- <https://www.guitartabs.cc>
+
 ## Further Contact or Information
 
 <staircaze@gmail.com>
