@@ -11,7 +11,7 @@ now it uses plain HTML, CSS, and JavaScript with no build step or external depen
 
 ## Version Update
 - Version 1.0
-- Updated on 18/10/2026
+- Updated on 26/10/2026
 
 ## Features
 
