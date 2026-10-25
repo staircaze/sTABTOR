@@ -73,7 +73,7 @@ now it uses plain HTML, CSS, and JavaScript with no build step or external depen
 - **Add note** adds a note using the current string, fret, duration, finger, and technique selections.
 - **Add rest** inserts a rest using the selected duration. The rest is shown as r/e/s/t down the first four string lines.
 - **Add bar** inserts a single bar line.
-- **Add double bar** inserts a double-bar boundary. Double bars pair in order: the first opens a repeated section and the next closes it. Set **Times** before adding the closing double bar; its `Nx` marker appears above the closing bar.
+- **Add double bar** inserts a double-bar boundary. Double bars pair in order: the first opens a repeated section and the next closes it. Set **Times** before adding the closing double bar; its `xNRepeat` marker appears beside the closing bar.
 - **New line** starts a new tablature staff below the existing without section label.
 - **Undo** removes the most recently added note or tablature event.
 - **Clear** asks for confirmation, then removes all tablature events. Metadata and instrument settings remain.
@@ -114,10 +114,14 @@ Firefox and Safari were not available for testing.
 ## Compatible TAB Archive Websites
 
 These are some tablature archive websites where sTABTOR tablature result are proven successfully submitted there:
-- <https://www.bigbasstabs.com>
-- <https://www.ultimate-guitar.com>
-- <https://www.guitartabs.cc>
+- [BIGBASSTABS.COM](https://www.bigbasstabs.com)
+- [ultimate-guitar.com](https://www.ultimate-guitar.com), published TAB using sTABTOR:
+  - [Man in A Suitcase BASS by The Police](https://tabs.ultimate-guitar.com/tab/the-police/man-in-a-suitcase-bass-6650951)
+- [GUITARTABS.CC](https://www.guitartabs.cc)
+
+## Tutorial Video
+- [YouTube tutorial video](https://youtu.be/6PDXd2Mhzp4)
 
 ## Further Contact or Information
 
-<staircaze@gmail.com>
+- <staircaze@gmail.com>

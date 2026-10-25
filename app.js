@@ -87,80 +87,166 @@ function renderStringChoices() {
 	}
 }
 
+
+
 function renderSystem(systemEntries, tuning, repeatLabels) {
-	const centerText = (text, width, fill = " ") => {
-		const leftPadding = Math.floor((width - text.length) / 2);
-		return fill.repeat(leftPadding) + text + fill.repeat(width - text.length - leftPadding);
-	};
-	const columns = systemEntries.map((entry) => {
-		let text = "";
+    const centerText = (text, width, fill = " ") => {
+        const leftPadding = Math.floor((width - text.length) / 2);
 
-		if (entry.type === "rest") {
-			text = "r";
-		} else if (entry.type === "bar") {
-			text = entry.glyph;
-		} else if (entry.technique === "x") {
-			text = "x";
-		} else {
-			text = String(entry.fret);
-			if (entry.technique === "slide") {
-				text += `${entry.slideTarget >= entry.fret ? "/" : "\\"}${entry.slideTarget}`;
-			} else {
-				text += entry.technique;
-			}
-		}
+        return (
+            fill.repeat(leftPadding) +
+            text +
+            fill.repeat(width - text.length - leftPadding)
+        );
+    };
 
-		const duration = entry.duration || "";
-		const finger = entry.finger || "";
-		const rightFinger = entry.rightFinger || "";
-		const repeatLabel = repeatLabels.get(entry) || "";
-		return {
-			...entry,
-			text,
-			duration,
-			finger,
-			rightFinger,
-			repeatLabel,
-			width: Math.max(
-				entry.type === "bar" ? 1 : 3,
-				text.length + (entry.type === "note" ? 2 : 0),
-				duration.length,
-				finger.length + (entry.type === "note" ? 2 : 0),
-					rightFinger.length + (entry.type === "note" ? 2 : 0),
-				repeatLabel.length,
-			),
-		};
-	});
+    const columns = systemEntries.map((entry) => {
+        let text = "";
 
-	const durationLine = `  ${columns
-		.map((column) => centerText(column.repeatLabel || column.duration, column.width))
-		.join("")}`;
-	const tabLines = tuning.map((string, stringIndex) => {
-		const cells = columns.map((column) => {
-			if (column.type === "bar") {
-				return column.glyph.padEnd(column.width, "-");
-			}
-				if (column.type === "rest") {
-					const restLetter = "rest"[stringIndex];
-					return restLetter ? centerText(restLetter, column.width, "-") : "-".repeat(column.width);
-				}
-			if (column.stringIndex !== stringIndex) {
-				return "-".repeat(column.width);
-			}
-			return centerText(column.text, column.width, "-");
-		});
-		const closingBar = columns[columns.length - 1]?.type === "bar" ? "" : "|";
-		return `${string.pitch}|${cells.length ? cells.join("") : "--"}${closingBar}`;
-	});
-	const fingerLine = `  ${columns
-		.map((column) => centerText(column.type === "note" ? column.finger : "", column.width))
-		.join("")}`;
-	const rightFingerLine = `  ${columns
-		.map((column) => centerText(column.type === "note" ? column.rightFinger : "", column.width))
-		.join("")}`;
+        if (entry.type === "rest") {
+            text = "r";
+        } else if (entry.type === "bar") {
+            text = entry.glyph === "||" ? "-||" : entry.glyph;
+        } else if (entry.technique === "x") {
+            text = "x";
+        } else {
+            text = String(entry.fret);
 
-	return [durationLine, ...tabLines, fingerLine, rightFingerLine].join("\n");
+            if (entry.technique === "slide") {
+                text += `${entry.slideTarget >= entry.fret ? "/" : "\\"}${entry.slideTarget}`;
+            } else {
+                text += entry.technique;
+            }
+        }
+
+        const duration = entry.duration || "";
+        const finger = entry.finger || "";
+        const rightFinger = entry.rightFinger || "";
+        const repeatLabel = repeatLabels.get(entry) || "";
+
+        return {
+            ...entry,
+            text,
+            duration,
+            finger,
+            rightFinger,
+            repeatLabel,
+            width: Math.max(
+                entry.type === "bar" ? 1 : 3,
+                text.length + (entry.type === "note" ? 2 : 0),
+                duration.length,
+                finger.length + (entry.type === "note" ? 2 : 0),
+                rightFinger.length + (entry.type === "note" ? 2 : 0),
+                repeatLabel.length
+            )
+        };
+    });
+
+    const durationLine = `  ${columns
+        .map((column) => {
+            const duration = centerText(column.duration, column.width);
+
+            if (column.repeatLabel) {
+                return duration + " ".repeat(column.repeatLabel.length + 2);
+            }
+
+            return duration;
+        })
+        .join("")}`;
+
+    const repeatIndex = columns.findIndex((column) => column.repeatLabel);
+    const repeatLabel =
+        repeatIndex >= 0 ? columns[repeatIndex].repeatLabel : "";
+
+    const hasFollowingEntries =
+        repeatIndex >= 0 && repeatIndex < columns.length - 1;
+
+    const tabLines = tuning.map((string, stringIndex) => {
+        const cells = columns.map((column) => {
+            if (column.type === "bar") {
+                return column.text.padEnd(column.width, "-");
+            }
+
+            if (column.type === "rest") {
+                const restLetter = "rest"[stringIndex];
+
+                return restLetter
+                    ? centerText(restLetter, column.width, "-")
+                    : "-".repeat(column.width);
+            }
+
+            if (column.stringIndex !== stringIndex) {
+                return "-".repeat(column.width);
+            }
+
+            return centerText(column.text, column.width, "-");
+        });
+
+        const lastColumn = columns[columns.length - 1];
+        const hasEndingBar = lastColumn?.type === "bar";
+
+        const tabLine =
+            `${string.pitch}|${cells.length ? cells.join("") : "--"}` +
+            (hasEndingBar ? "" : "|");
+
+        if (repeatIndex < 0 || !repeatLabel) {
+            return tabLine;
+        }
+
+        const prefixLength =
+            `${string.pitch}|${cells
+                .slice(0, repeatIndex + 1)
+                .join("")}`.length;
+
+        const prefix = tabLine.slice(0, prefixLength);
+        const suffix = tabLine.slice(prefixLength);
+
+        const repeatGap = ` ${repeatLabel} `;
+
+        // No extra separator when the repeat bar is the final entry.
+        if (!hasFollowingEntries) {
+            if (stringIndex === tuning.length - 1) {
+                return `${prefix}${repeatGap}`;
+            }
+
+            return `${prefix}${" ".repeat(repeatGap.length)}`;
+        }
+
+        // If more entries follow, align the next tablature column
+        // across every string and place the repeat label on the bottom.
+        if (stringIndex === tuning.length - 1) {
+            return `${prefix}${repeatGap}|${suffix}`;
+        }
+
+        return `${prefix}${" ".repeat(repeatGap.length)}|${suffix}`;
+    });
+
+    const fingerLine = `  ${columns
+        .map((column) =>
+            centerText(
+                column.type === "note" ? column.finger : "",
+                column.width
+            )
+        )
+        .join("")}`;
+
+    const rightFingerLine = `  ${columns
+        .map((column) =>
+            centerText(
+                column.type === "note" ? column.rightFinger : "",
+                column.width
+            )
+        )
+        .join("")}`;
+
+    return [
+        durationLine,
+        ...tabLines,
+        fingerLine,
+        rightFingerLine
+    ].join("\n");
 }
+
 
 function renderTab() {
 	const tuning = getCurrentTuning();
@@ -171,7 +257,7 @@ function renderTab() {
 		if (entry.type === "bar" && entry.glyph === "||") {
 			doubleBarCount += 1;
 			if (doubleBarCount % 2 === 0) {
-				repeatLabels.set(entry, `${entry.repeatCount || 2}x`);
+				repeatLabels.set(entry, `x${entry.repeatCount || 2}`);
 			}
 		}
 		if (entry.type === "lineBreak") {
@@ -209,13 +295,13 @@ function addSection() {
 		sectionTextInput.focus();
 		return;
 	}
-	entries.push({ type: "section", text });
+	entries.push({ type: "section", text: `[${text}]` });
 	sectionTextInput.value = "";
 	renderTab();
 }
 
 function createTabText() {
-	const separator = "=".repeat(95);
+	const separator = "=".repeat(99);
 	const tuning = getCurrentTuning();
 	const instrumentName = instrumentChoice.selectedOptions[0].textContent;
 	const info = document.querySelector("#tab-info").value.trim() || `${tuning.length} Strings Standard ${instrumentName}`;
@@ -228,10 +314,9 @@ function createTabText() {
 	const artist = document.querySelector("#tab-artist").value.trim() || "Unknown";
 	const creator = document.querySelector("#tab-creator").value.trim() || "NoName";
 	const readingGuide = [
-		"-".repeat(95),
+		"-".repeat(99),
 		"TABS READING GUIDE:",
-		"-".repeat(95),
-		`<<< Generated with sTABTOR by PHAD | https://staircaze.github.io/sTABTOR >>>`,
+		"-".repeat(99),
 		"Note length (above the strings):",
 		"   w = whole, h = half, q = quarter, e = eighth, s = sixteenth, t = thirty-second.",
 		"   a period after a duration symbol marks a dotted note.",
@@ -244,7 +329,8 @@ function createTabText() {
 		"   S = slap, P = pop, t = tap, H = harmonic, x = muted note,",
 		"   | = bar line; || = double bar line.",
 		"Repeat count:",
-		"   Nx above a closing double bar marks N times the section between double bars repeat.",
+		"   xNRepeat beside a closing double bar marks NRepeat times the section between double bars repeat.",
+		`   <<< Generated with sTABTOR by PHAD | https://staircaze.github.io/sTABTOR >>>`,
 		separator,
 	];
 	const formatHeaderLine = (label, value) => `${label.padEnd(15, " ")}: ${value}`;
